@@ -1,8 +1,8 @@
-# CrackingWall
+# Pixelatmos
 
 **Creative tools + tech-culture wallpapers.** Live at **[pixelatmos.com](https://pixelatmos.com)**.
 
-CrackingWall is an independent studio site: a small suite of original, browser-based
+Pixelatmos is an independent studio site: a small suite of original, browser-based
 creative tools (ASCII Lab, Visual Protocol, 3D Lab) plus a curated gallery of
 tech-culture wallpapers.
 
