@@ -12,6 +12,8 @@
  * `collapseEmpty` (default on) hides the container in that state so the page
  * has no unexplained gap.
  */
+import { AD_CLIENT } from '../config/adsense';
+
 interface Props {
   /** Ad slot ID from the AdSense unit. */
   slot: string;
@@ -35,7 +37,7 @@ const {
   class: className = '',
 } = Astro.props;
 
-const client = 'ca-pub-8714088553332616';
+const client = AD_CLIENT;
 const uid = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
