@@ -2,6 +2,7 @@
 export const prerender = true;
 import AppLayout from '../../layouts/AppLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AdUnit from '../../components/AdUnit.astro';
 
 const siteURL = Astro.site?.toString().replace(/\/$/, '') ?? 'https://pixelatmos.com';
 const title = 'How to Optimize SVG Files for the Web';
@@ -164,6 +165,8 @@ const schema = {
       Which is the argument for conservative optimization generally: keep the structure, drop the
       bytes that were never doing anything.
     </p>
+
+    <AdUnit slot="7346728233" class="not-prose" />
 
     <div class="not-prose mt-12 grid gap-3 sm:grid-cols-3">
       <a href="/svg-optimizer/" class="group border-2 border-black bg-brutal-dark-bg p-4 shadow-brutal-sm transition-transform hover:-translate-y-0.5">

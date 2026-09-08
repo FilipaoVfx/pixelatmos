@@ -1,0 +1,88 @@
+---
+/**
+ * A single AdSense display unit.
+ *
+ * The adsbygoogle.js loader is already in AppLayout and Layout, so this
+ * deliberately renders only the <ins> and the push() call. Including the
+ * loader again — as the snippet AdSense hands you does — would fetch the
+ * script twice on every page.
+ *
+ * Until the site is approved the slot renders empty, which is expected: Google
+ * needs to see live units on pages that get views before it will approve.
+ * `collapseEmpty` (default on) hides the container in that state so the page
+ * has no unexplained gap.
+ */
+interface Props {
+  /** Ad slot ID from the AdSense unit. */
+  slot: string;
+  /** AdSense format hint. 'auto' adapts to the container. */
+  format?: string;
+  /** Let the unit go full-width on mobile. */
+  fullWidthResponsive?: boolean;
+  /** Optional label above the unit — several jurisdictions expect ads to be marked. */
+  label?: string;
+  /** Hide the wrapper when no ad fills the slot. */
+  collapseEmpty?: boolean;
+  class?: string;
+}
+
+const {
+  slot,
+  format = 'auto',
+  fullWidthResponsive = true,
+  label = 'Advertisement',
+  collapseEmpty = true,
+  class: className = '',
+} = Astro.props;
+
+const client = 'ca-pub-8714088553332616';
+const uid = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<aside
+  id={uid}
+  class={`ad-unit my-8 ${className}`}
+  data-collapse={collapseEmpty ? 'true' : 'false'}
+  aria-label={label}
+>
+  {label && (
+    <p class="mb-1.5 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-gray-600">{label}</p>
+  )}
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client={client}
+    data-ad-slot={slot}
+    data-ad-format={format}
+    data-full-width-responsive={fullWidthResponsive ? 'true' : 'false'}
+  ></ins>
+</aside>
+
+<script define:vars={{ uid }}>
+  (function () {
+    const wrapper = document.getElementById(uid);
+    if (!wrapper) return;
+    const ins = wrapper.querySelector('ins.adsbygoogle');
+    if (!ins) return;
+
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {
+      // The loader is blocked (ad blocker, or the script failed). Nothing to
+      // recover — just make sure the empty box does not leave a gap.
+      wrapper.hidden = true;
+      return;
+    }
+
+    if (wrapper.dataset.collapse !== 'true') return;
+
+    // AdSense sets data-ad-status="unfilled" when no ad is served, which is the
+    // normal state before approval. Watch for it rather than guessing on a timer.
+    const check = () => {
+      const status = ins.getAttribute('data-ad-status');
+      if (status === 'unfilled') wrapper.hidden = true;
+    };
+    new MutationObserver(check).observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
+    check();
+  })();
+</script>
