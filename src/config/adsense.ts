@@ -15,7 +15,7 @@
  */
 
 /** Publisher ID without the "ca-" prefix, as it appears in ads.txt. */
-export const PUBLISHER_ID = 'pub-8714088553332616';
+export const PUBLISHER_ID = 'pub-1028294908787451';
 
 /** Client ID as the ad tag and <ins> elements expect it. */
 export const AD_CLIENT = `ca-${PUBLISHER_ID}`;
@@ -29,8 +29,15 @@ export const AD_LOADER_SRC = `https://pagead2.googlesyndication.com/pagead/js/ad
  */
 export const ADS_TXT = `google.com, ${PUBLISHER_ID}, DIRECT, f08c47fec0942fa0`;
 
-/** Ad slots created in the AdSense dashboard. */
+/**
+ * Ad slots created in the AdSense dashboard.
+ *
+ * Slot IDs belong to the publisher that created them — the ones below were
+ * made under a different account and will not fill. Create the unit again in
+ * this account and replace the value; until then the slot renders nothing,
+ * which AdUnit collapses so no gap appears.
+ */
 export const AD_SLOTS = {
-  /** Responsive display unit used on article and wallpaper pages. */
+  /** Responsive display unit used on article and wallpaper pages. TODO: recreate under pub-1028294908787451. */
   inArticle: '7346728233',
 } as const;
