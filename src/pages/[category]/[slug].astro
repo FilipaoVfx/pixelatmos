@@ -4,6 +4,7 @@ import AppLayout from '../../layouts/AppLayout.astro';
 import { WallpaperService } from '../../services/wallpaperService';
 import { wallpaperSlug, wallpaperPath } from '../../utils/wallpaper';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AdUnit from '../../components/AdUnit.astro';
 import { Download, ArrowLeft, Layers, Monitor, Heart, ExternalLink, Link2 } from 'lucide-react';
 
 export async function getStaticPaths() {
@@ -195,6 +196,8 @@ const chip = 'flex items-center gap-1.5 border-2 border-white/15 px-3 py-1.5 fon
         </div>
       </section>
     )}
+
+    <AdUnit slot="7346728233" />
 
     <!-- Flywheel bridge: wallpapers are the discovery layer, the tools are the
          product. Someone who came here for a background is exactly the audience
